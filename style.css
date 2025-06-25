@@ -4,61 +4,21 @@
     --text-color: #2c3e50;
     --header-color: #34495e;
     --card-bg-color: #ffffff;
-    --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* سایه کمتر برای کاشی‌های کوچک‌تر */
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     --tab-bg-color: #e9ecef;
     --tab-active-bg-color: #3498db;
     --tab-active-text-color: #ffffff;
-    --wallpaper-overlay-color: rgba(244, 247, 249, 0.8);
 }
 
-:root {
-    --tab-padding-y: 0.5rem; /* کاهش padding عمودی زبانه ها */
-    --tab-padding-x: 1rem;   /* کاهش padding افقی زبانه ها */
-    --tab-font-size: 0.9rem; /* کاهش اندازه فونت زبانه ها */
-    --tile-padding: 1.2rem;  /* کاهش padding کاشی ها */
-    --tile-font-size: 1rem;  /* کاهش اندازه فونت کاشی ها */
-    --tile-min-width: 150px; /* کاهش حداقل عرض کاشی ها */
-    --grid-gap: 1rem;        /* کاهش فاصله بین کاشی ها */
-}
-
-@media (max-width: 768px) {
-    :root {
-        --tile-min-width: 120px;
-        --grid-gap: 0.75rem;
-        --tile-padding: 1rem;
-        --tile-font-size: 0.9rem;
-        --tab-font-size: 0.85rem;
-        --tab-padding-y: 0.4rem;
-        --tab-padding-x: 0.8rem;
-    }
-}
-
-/* حالت تاریک */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #1c2833;
-        --text-color: #ecf0f1;
-        --header-color: #ecf0f1;
-        --card-bg-color: #283747;
-        --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); /* سایه کمتر برای کاشی‌های کوچک‌تر در حالت تاریک */
-        --tab-bg-color: #2c3e50;
-        --tab-active-bg-color: #5dade2;
-        --tab-active-text-color: #17202a;
-        --wallpaper-overlay-color: rgba(28, 40, 51, 0.85);
-    }
-}
-
-/* اعمال شده برای وقتی که کاربر تم تیره را انتخاب کند */
-body.dark-theme {
+[data-theme="dark"] {
     --bg-color: #1c2833;
     --text-color: #ecf0f1;
     --header-color: #ecf0f1;
     --card-bg-color: #283747;
-    --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     --tab-bg-color: #2c3e50;
     --tab-active-bg-color: #5dade2;
     --tab-active-text-color: #17202a;
-    --wallpaper-overlay-color: rgba(28, 40, 51, 0.85);
 }
 
 /* --- Base Styles --- */
@@ -76,42 +36,29 @@ body {
     line-height: 1.6;
 }
 
-.background-wallpaper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    background-image: url('assests/Kings.Crypt_Art.by.Sina.Hayati.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px);
-    transform: scale(1.1);
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    position: relative;
-    z-index: 1;
-    background-color: var(--wallpaper-overlay-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* --- Header --- */
+/* --- Header & Main Layout --- */
 header {
     text-align: center;
     margin-bottom: 1rem;
-    cursor: default; /* حذف حالت اشاره گر */
-    user-select: none; /* جلوگیری از انتخاب متن هدر */
+    cursor: pointer;
+    user-select: none;
+}
+
+main {
+    flex-grow: 1; /* این استایل فوتر را به پایین صفحه می‌چسباند */
 }
 
 header h1 {
-    font-size: 2.5rem; /* کمی کوچکتر */
+    font-size: 3rem;
     font-weight: 900;
     color: var(--header-color);
     transition: color 0.3s;
@@ -119,9 +66,9 @@ header h1 {
 
 .description {
     text-align: center;
-    font-size: 1rem; /* کمی کوچکتر */
+    font-size: 1.1rem;
     color: var(--text-color);
-    margin-bottom: 2rem; /* کمی کمتر */
+    margin-bottom: 2.5rem;
 }
 
 /* --- Tabs --- */
@@ -129,25 +76,25 @@ header h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.3rem; /* کاهش فاصله بین زبانه ها */
-    margin-bottom: 1.5rem; /* کمی کمتر */
+    gap: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .tab-button {
     font-family: 'Vazirmatn', sans-serif;
-    padding: var(--tab-padding-y) var(--tab-padding-x);
+    padding: 0.7rem 1.5rem;
     border: none;
     background-color: var(--tab-bg-color);
     color: var(--text-color);
     cursor: pointer;
-    border-radius: 15px; /* کمی گردتر */
-    font-size: var(--tab-font-size);
+    border-radius: 20px;
+    font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .tab-button:hover {
-    transform: translateY(-1px); /* واکنش کمتر هنگام هاور */
+    transform: translateY(-2px);
 }
 
 .tab-button.active {
@@ -159,7 +106,6 @@ header h1 {
 /* --- Tab Content & Tiles --- */
 .tab-content {
     display: none;
-    flex-grow: 1; /* برای اینکه main فضا را بگیرد */
 }
 
 .tab-content.active {
@@ -168,14 +114,14 @@ header h1 {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); } /* انیمیشن ورود ملایم تر */
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .tiles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--tile-min-width), 1fr));
-    gap: var(--grid-gap);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
 }
 
 .tile {
@@ -183,29 +129,28 @@ header h1 {
     justify-content: center;
     align-items: center;
     background-color: var(--card-bg-color);
-    padding: var(--tile-padding);
-    border-radius: 13px;
+    padding: 2rem;
+    border-radius: 20px; /* -- یکسان‌سازی با گردی زبانه‌ها -- */
     box-shadow: var(--card-shadow);
     text-decoration: none;
     color: var(--text-color);
-    font-size: var(--tile-font-size);
+    font-size: 1.1rem;
     font-weight: 600;
     text-align: center;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* واکنش سریعتر */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tile:hover {
-    transform: translateY(-3px) scale(1.02); /* واکنش کمتر هنگام هاور */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* سایه کمتر هنگام هاور */
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Footer --- */
 footer {
     text-align: center;
-    padding: 1rem 0;
-    font-size: 0.8rem;
+    padding-top: 2rem;
+    font-size: 0.9rem;
     color: var(--text-color);
-    margin-top: 2rem;
 }
 
 /* --- Responsive --- */
@@ -214,6 +159,10 @@ footer {
         padding: 1rem;
     }
     header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
+    }
+    .tiles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
     }
 }
