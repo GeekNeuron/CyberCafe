@@ -4,19 +4,57 @@
     --text-color: #2c3e50;
     --header-color: #34495e;
     --card-bg-color: #ffffff;
-    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* سایه کمتر برای کاشی‌های کوچک‌تر */
     --tab-bg-color: #e9ecef;
     --tab-active-bg-color: #3498db;
     --tab-active-text-color: #ffffff;
     --wallpaper-overlay-color: rgba(244, 247, 249, 0.8);
 }
 
-[data-theme="dark"] {
+:root {
+    --tab-padding-y: 0.5rem; /* کاهش padding عمودی زبانه ها */
+    --tab-padding-x: 1rem;   /* کاهش padding افقی زبانه ها */
+    --tab-font-size: 0.9rem; /* کاهش اندازه فونت زبانه ها */
+    --tile-padding: 1.2rem;  /* کاهش padding کاشی ها */
+    --tile-font-size: 1rem;  /* کاهش اندازه فونت کاشی ها */
+    --tile-min-width: 150px; /* کاهش حداقل عرض کاشی ها */
+    --grid-gap: 1rem;        /* کاهش فاصله بین کاشی ها */
+}
+
+@media (max-width: 768px) {
+    :root {
+        --tile-min-width: 120px;
+        --grid-gap: 0.75rem;
+        --tile-padding: 1rem;
+        --tile-font-size: 0.9rem;
+        --tab-font-size: 0.85rem;
+        --tab-padding-y: 0.4rem;
+        --tab-padding-x: 0.8rem;
+    }
+}
+
+/* حالت تاریک */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1c2833;
+        --text-color: #ecf0f1;
+        --header-color: #ecf0f1;
+        --card-bg-color: #283747;
+        --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); /* سایه کمتر برای کاشی‌های کوچک‌تر در حالت تاریک */
+        --tab-bg-color: #2c3e50;
+        --tab-active-bg-color: #5dade2;
+        --tab-active-text-color: #17202a;
+        --wallpaper-overlay-color: rgba(28, 40, 51, 0.85);
+    }
+}
+
+/* اعمال شده برای وقتی که کاربر تم تیره را انتخاب کند */
+body.dark-theme {
     --bg-color: #1c2833;
     --text-color: #ecf0f1;
     --header-color: #ecf0f1;
     --card-bg-color: #283747;
-    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
     --tab-bg-color: #2c3e50;
     --tab-active-bg-color: #5dade2;
     --tab-active-text-color: #17202a;
@@ -45,7 +83,6 @@ body {
     width: 100%;
     height: 100vh;
     z-index: -1;
-    /* ---!!! والپیپر خود را اینجا قرار دهید !!! --- */
     background-image: url('https://source.unsplash.com/random/1920x1080?abstract');
     background-size: cover;
     background-position: center;
@@ -62,18 +99,20 @@ body {
     background-color: var(--wallpaper-overlay-color);
     min-height: 100vh;
     backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* --- Header --- */
 header {
     text-align: center;
     margin-bottom: 1rem;
-    cursor: pointer;
+    cursor: default; /* حذف حالت اشاره گر */
     user-select: none; /* جلوگیری از انتخاب متن هدر */
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 2.5rem; /* کمی کوچکتر */
     font-weight: 900;
     color: var(--header-color);
     transition: color 0.3s;
@@ -81,9 +120,9 @@ header h1 {
 
 .description {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem; /* کمی کوچکتر */
     color: var(--text-color);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem; /* کمی کمتر */
 }
 
 /* --- Tabs --- */
@@ -91,25 +130,25 @@ header h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    gap: 0.3rem; /* کاهش فاصله بین زبانه ها */
+    margin-bottom: 1.5rem; /* کمی کمتر */
 }
 
 .tab-button {
     font-family: 'Vazirmatn', sans-serif;
-    padding: 0.7rem 1.5rem;
+    padding: var(--tab-padding-y) var(--tab-padding-x);
     border: none;
     background-color: var(--tab-bg-color);
     color: var(--text-color);
     cursor: pointer;
-    border-radius: 20px;
-    font-size: 1rem;
+    border-radius: 15px; /* کمی گردتر */
+    font-size: var(--tab-font-size);
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .tab-button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px); /* واکنش کمتر هنگام هاور */
 }
 
 .tab-button.active {
@@ -121,6 +160,7 @@ header h1 {
 /* --- Tab Content & Tiles --- */
 .tab-content {
     display: none;
+    flex-grow: 1; /* برای اینکه main فضا را بگیرد */
 }
 
 .tab-content.active {
@@ -129,14 +169,14 @@ header h1 {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(5px); } /* انیمیشن ورود ملایم تر */
     to { opacity: 1; transform: translateY(0); }
 }
 
 .tiles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--tile-min-width), 1fr));
+    gap: var(--grid-gap);
 }
 
 .tile {
@@ -144,20 +184,29 @@ header h1 {
     justify-content: center;
     align-items: center;
     background-color: var(--card-bg-color);
-    padding: 2rem;
-    border-radius: 12px;
+    padding: var(--tile-padding);
+    border-radius: 10px; /* کمی گردتر */
     box-shadow: var(--card-shadow);
     text-decoration: none;
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: var(--tile-font-size);
     font-weight: 600;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* واکنش سریعتر */
 }
 
 .tile:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px) scale(1.02); /* واکنش کمتر هنگام هاور */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* سایه کمتر هنگام هاور */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    margin-top: 2rem;
 }
 
 /* --- Responsive --- */
@@ -166,10 +215,6 @@ header h1 {
         padding: 1rem;
     }
     header h1 {
-        font-size: 2.5rem;
-    }
-    .tiles-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
+        font-size: 2rem;
     }
 }
