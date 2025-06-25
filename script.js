@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeSwitcher = document.getElementById('theme-switcher');
     const htmlElement = document.documentElement;
 
-    // Load saved theme from localStorage
+    // بارگذاری تم ذخیره شده از حافظه مرورگر
     const savedTheme = localStorage.getItem('theme') || 'light';
     htmlElement.setAttribute('data-theme', savedTheme);
 
@@ -12,10 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         htmlElement.setAttribute('data-theme', newTheme);
-        // Save the new theme to localStorage
+        // ذخیره تم جدید
         localStorage.setItem('theme', newTheme);
     });
-
 
     // --- Tab Functionality ---
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -23,14 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
+            // حذف کلاس فعال از تمام دکمه‌ها و محتواها
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
 
-            // Add active class to the clicked button
+            // افزودن کلاس فعال به دکمه کلیک شده
             button.classList.add('active');
 
-            // Show the corresponding content
+            // نمایش محتوای متناظر
             const tabId = button.getAttribute('data-tab');
             const targetContent = document.getElementById(tabId);
             if (targetContent) {
@@ -38,5 +37,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
 });
