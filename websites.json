@@ -1,0 +1,59 @@
+[
+  {
+    "categoryName": "شرکتی",
+    "categoryId": "corporate",
+    "sites": [
+      {
+        "name": "گوگل",
+        "url": "https://www.google.com"
+      },
+      {
+        "name": "مایکروسافت",
+        "url": "https://www.microsoft.com"
+      },
+      {
+        "name": "اپل",
+        "url": "https://www.apple.com"
+      }
+    ]
+  },
+  {
+    "categoryName": "نظامی",
+    "categoryId": "military",
+    "sites": [
+      {
+        "name": "وب‌سایت نمونه ۱",
+        "url": "#"
+      },
+      {
+        "name": "وب‌سایت نمونه ۲",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "categoryName": "فرهنگی",
+    "categoryId": "cultural",
+    "sites": []
+  },
+  {
+    "categoryName": "پزشکی",
+    "categoryId": "medical",
+    "sites": [
+      {
+        "name": "Medscape",
+        "url": "https://www.medscape.com/"
+      }
+    ]
+  },
+  {
+    "categoryName": "خبری",
+    "categoryId": "news",
+    "sites": [
+      {
+        "name": "BBC فارسی",
+        "url": "https://www.bbc.com/persian"
+      }
+    ]
+  }
+]
