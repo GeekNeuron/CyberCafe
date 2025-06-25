@@ -98,7 +98,6 @@ body {
     z-index: 1;
     background-color: var(--wallpaper-overlay-color);
     min-height: 100vh;
-    backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
 }
@@ -185,7 +184,7 @@ header h1 {
     align-items: center;
     background-color: var(--card-bg-color);
     padding: var(--tile-padding);
-    border-radius: 10px; /* کمی گردتر */
+    border-radius: 13px;
     box-shadow: var(--card-shadow);
     text-decoration: none;
     color: var(--text-color);
